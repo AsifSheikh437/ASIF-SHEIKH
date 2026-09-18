@@ -1,0 +1,519 @@
+@import "tailwindcss";
+
+/* -------------------------------------------------------------------------
+   CSS VARIABLES FOR LIGHT & DARK THEMES (Food ERP)
+   ------------------------------------------------------------------------- */
+:root {
+  /* Color Palette - Light Mode */
+  --bg-app: #f8fafc; /* slate-50 */
+  --bg-surface: #ffffff; /* pure white cards */
+  --bg-surface-elevated: #ffffff;
+  --bg-surface-subtle: #f1f5f9; /* slate-100 */
+  --bg-surface-hover: #f8fafc;
+  
+  --text-primary: #0f172a; /* slate-900 */
+  --text-secondary: #334155; /* slate-700 */
+  --text-muted: #64748b; /* slate-500 */
+  --text-faint: #94a3b8; /* slate-400 */
+  
+  --border-default: #e2e8f0; /* slate-200 */
+  --border-subtle: #f1f5f9; /* slate-100 */
+  --border-prominent: #cbd5e1; /* slate-300 */
+  
+  --header-bg: #ffffff;
+  --header-border: #e2e8f0;
+  
+  --sidebar-bg: #0f172a; /* classic slate-900 */
+  --sidebar-border: #1e293b;
+  --sidebar-text: #cbd5e1;
+  --sidebar-hover: rgba(30, 41, 59, 0.8);
+  
+  --input-bg: #ffffff;
+  --input-border: #e2e8f0;
+  --input-focus-border: #0d9488;
+  --input-text: #0f172a;
+  --input-placeholder: #94a3b8;
+  
+  --table-head-bg: #f1f5f9;
+  --table-head-text: #334155;
+  --table-row-even: rgba(248, 250, 252, 0.5);
+  --table-row-hover: rgba(204, 251, 241, 0.45);
+  --table-border: #f1f5f9;
+  
+  --chart-grid: #e2e8f0;
+  --chart-axis: #64748b;
+  --chart-tooltip-bg: #0f172a;
+  --chart-tooltip-text: #ffffff;
+  
+  --card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
+  --modal-backdrop: rgba(15, 23, 42, 0.6);
+  --scrollbar-track: #f1f5f9;
+  --scrollbar-thumb: #cbd5e1;
+}
+
+[data-theme="dark"],
+.dark {
+  /* Color Palette - Dark Mode (Rich Charcoal & Deep Navy with Vibrant Accents) */
+  --bg-app: #080d1a; /* deep dark navy canvas */
+  --bg-surface: #10192d; /* refined charcoal/navy cards */
+  --bg-surface-elevated: #16223d; /* modals & elevated dropdowns */
+  --bg-surface-subtle: #142038; /* subtle inner panels & chips */
+  --bg-surface-hover: #1c2c4d;
+  
+  --text-primary: #f8fafc; /* crisp white for maximum legibility */
+  --text-secondary: #cbd5e1; /* slate-300 */
+  --text-muted: #94a3b8; /* slate-400 */
+  --text-faint: #64748b; /* slate-500 */
+  
+  --border-default: #1e2e4f; /* soft distinct border */
+  --border-subtle: #17243e;
+  --border-prominent: #2a3f6b;
+  
+  --header-bg: #0d1527;
+  --header-border: #1a2744;
+  
+  --sidebar-bg: #070d18;
+  --sidebar-border: #141f35;
+  --sidebar-text: #94a3b8;
+  --sidebar-hover: rgba(30, 41, 59, 0.7);
+  
+  --input-bg: #0a1120;
+  --input-border: #1f3054;
+  --input-focus-border: #14b8a6; /* bright vibrant teal */
+  --input-text: #f8fafc;
+  --input-placeholder: #64748b;
+  
+  --table-head-bg: #0f182c;
+  --table-head-text: #cbd5e1;
+  --table-row-even: rgba(15, 25, 45, 0.4);
+  --table-row-hover: rgba(20, 184, 166, 0.15);
+  --table-border: #192742;
+  
+  --chart-grid: #1e2e4f;
+  --chart-axis: #94a3b8;
+  --chart-tooltip-bg: #070d18;
+  --chart-tooltip-text: #f8fafc;
+  
+  --card-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  --modal-backdrop: rgba(2, 6, 23, 0.8);
+  --scrollbar-track: #080d1a;
+  --scrollbar-thumb: #1e2e4f;
+}
+
+/* -------------------------------------------------------------------------
+   SMOOTH 0.3s FADE TRANSITION FOR THEME TOGGLE
+   ------------------------------------------------------------------------- */
+html,
+body,
+header,
+aside,
+main,
+section,
+article,
+table,
+th,
+td,
+tr,
+input,
+select,
+textarea,
+button,
+.erp-table-container,
+.theme-transition {
+  transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* -------------------------------------------------------------------------
+   GLOBAL DARK MODE AUTOMATIC COMPONENT MAPPINGS
+   ------------------------------------------------------------------------- */
+[data-theme="dark"] {
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  color-scheme: dark;
+}
+
+[data-theme="dark"] body {
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] header {
+  background-color: var(--header-bg) !important;
+  border-color: var(--header-border) !important;
+}
+
+[data-theme="dark"] aside#app-corporate-sidebar {
+  background-color: var(--sidebar-bg) !important;
+  border-color: var(--sidebar-border) !important;
+}
+
+[data-theme="dark"] .bg-white {
+  background-color: var(--bg-surface) !important;
+}
+
+[data-theme="dark"] .bg-slate-50 {
+  background-color: var(--bg-surface-subtle) !important;
+}
+
+[data-theme="dark"] .bg-slate-100 {
+  background-color: var(--bg-surface-subtle) !important;
+}
+
+[data-theme="dark"] .bg-slate-100\/90,
+[data-theme="dark"] .bg-slate-100\/80 {
+  background-color: var(--bg-surface-subtle) !important;
+}
+
+[data-theme="dark"] .bg-slate-200 {
+  background-color: var(--border-default) !important;
+}
+
+[data-theme="dark"] .text-slate-900,
+[data-theme="dark"] .text-slate-950,
+[data-theme="dark"] .text-slate-800 {
+  color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .text-slate-700,
+[data-theme="dark"] .text-slate-600 {
+  color: var(--text-secondary) !important;
+}
+
+[data-theme="dark"] .text-slate-500,
+[data-theme="dark"] .text-slate-400 {
+  color: var(--text-muted) !important;
+}
+
+[data-theme="dark"] .border-slate-200,
+[data-theme="dark"] .border-slate-100,
+[data-theme="dark"] .border-slate-300 {
+  border-color: var(--border-default) !important;
+}
+
+[data-theme="dark"] .border-slate-200\/80,
+[data-theme="dark"] .border-slate-200\/60 {
+  border-color: var(--border-default) !important;
+}
+
+[data-theme="dark"] .divide-slate-100 > :not([hidden]) ~ :not([hidden]),
+[data-theme="dark"] .divide-slate-200 > :not([hidden]) ~ :not([hidden]) {
+  border-color: var(--border-default) !important;
+}
+
+/* Modals and Backdrops in Dark Mode */
+[data-theme="dark"] .bg-slate-900\/60,
+[data-theme="dark"] .bg-slate-950\/60 {
+  background-color: var(--modal-backdrop) !important;
+}
+
+/* Form Controls & Inputs in Dark Mode */
+[data-theme="dark"] input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]):not([type="file"]),
+[data-theme="dark"] select,
+[data-theme="dark"] textarea {
+  background-color: var(--input-bg) !important;
+  color: var(--input-text) !important;
+  border-color: var(--input-border) !important;
+}
+
+[data-theme="dark"] select option {
+  background-color: var(--bg-surface-elevated) !important;
+  color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] input::placeholder,
+[data-theme="dark"] textarea::placeholder {
+  color: var(--input-placeholder) !important;
+}
+
+/* Tooltips, Popups, Dropdowns & Modals */
+[data-theme="dark"] #user-profile-dropdown,
+[data-theme="dark"] [id$="-dropdown"],
+[data-theme="dark"] .shadow-xl,
+[data-theme="dark"] .shadow-2xl {
+  background-color: var(--bg-surface-elevated) !important;
+  border-color: var(--border-default) !important;
+  box-shadow: var(--card-shadow) !important;
+}
+
+/* SVG Charts in Dark Mode */
+[data-theme="dark"] svg line[stroke="#e2e8f0"],
+[data-theme="dark"] svg line[stroke="#cbd5e1"] {
+  stroke: var(--chart-grid) !important;
+}
+
+[data-theme="dark"] svg text[fill="#94a3b8"],
+[data-theme="dark"] svg text[fill="#64748b"] {
+  fill: var(--chart-axis) !important;
+}
+
+@layer components {
+  /* Corporate Enterprise ERP Table Style */
+  .erp-table-container {
+    @apply w-full overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-xs;
+  }
+
+  .erp-table {
+    @apply w-full border-collapse text-left text-xs;
+  }
+
+  .erp-table thead th {
+    @apply bg-slate-100/90 text-slate-700 font-bold uppercase tracking-wider py-3 px-3.5 border-b border-slate-200 select-none;
+  }
+
+  .erp-table tbody tr {
+    @apply border-b border-slate-100 transition-colors;
+  }
+
+  .erp-table tbody tr:nth-child(even) {
+    @apply bg-slate-50/40;
+  }
+
+  .erp-table tbody tr:hover {
+    @apply bg-teal-50/50;
+  }
+
+  .erp-table td {
+    @apply py-3 px-3.5 text-slate-700 align-middle;
+  }
+
+  .erp-table td.text-right,
+  .erp-table th.text-right {
+    @apply text-right font-mono;
+  }
+}
+
+/* Dark Mode Overrides for ERP Table */
+[data-theme="dark"] .erp-table-container {
+  background-color: var(--bg-surface) !important;
+  border-color: var(--border-default) !important;
+}
+
+[data-theme="dark"] .erp-table thead th {
+  background-color: var(--table-head-bg) !important;
+  color: var(--table-head-text) !important;
+  border-color: var(--table-border) !important;
+}
+
+[data-theme="dark"] .erp-table tbody tr {
+  border-color: var(--table-border) !important;
+}
+
+[data-theme="dark"] .erp-table tbody tr:nth-child(even) {
+  background-color: var(--table-row-even) !important;
+}
+
+[data-theme="dark"] .erp-table tbody tr:hover {
+  background-color: var(--table-row-hover) !important;
+}
+
+[data-theme="dark"] .erp-table td {
+  color: var(--text-secondary) !important;
+}
+
+/* Custom Scrollbar for sleek ERP UI */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+/* -------------------------------------------------------------------------
+   PRINT & PDF LAYOUT (ALWAYS FORCES CLEAN WHITE BACKGROUND & DARK TEXT)
+   Regardless of active screen theme!
+   ------------------------------------------------------------------------- */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 8mm;
+  }
+
+  html,
+  body,
+  [data-theme="dark"],
+  .dark {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+    font-size: 10.5pt !important;
+    font-family: 'Hind Siliguri', 'Plus Jakarta Sans', sans-serif !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    color-scheme: light !important;
+    --bg-app: #ffffff !important;
+    --bg-surface: #ffffff !important;
+    --bg-surface-subtle: #ffffff !important;
+    --text-primary: #0f172a !important;
+    --text-secondary: #334155 !important;
+    --border-default: #cbd5e1 !important;
+  }
+
+  [data-theme="dark"] * {
+    color: #0f172a !important;
+    background-color: transparent !important;
+    border-color: #cbd5e1 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  [data-theme="dark"] .bg-white,
+  [data-theme="dark"] [class*="bg-white"] {
+    background-color: #ffffff !important;
+  }
+
+  [data-theme="dark"] .bg-slate-50,
+  [data-theme="dark"] .bg-slate-100 {
+    background-color: #f8fafc !important;
+  }
+
+  [data-theme="dark"] .text-slate-900,
+  [data-theme="dark"] .text-slate-950,
+  [data-theme="dark"] .text-slate-800,
+  [data-theme="dark"] .text-slate-700,
+  [data-theme="dark"] .text-slate-600,
+  [data-theme="dark"] .text-white {
+    color: #0f172a !important;
+  }
+
+  [data-theme="dark"] .border-slate-200,
+  [data-theme="dark"] .border-slate-300,
+  [data-theme="dark"] .border-slate-800 {
+    border-color: #cbd5e1 !important;
+  }
+
+  /* Universal Hide for Navigation, Sidebars, Header, Modals Backdrop and Action Buttons */
+  header,
+  aside,
+  nav,
+  #app-corporate-sidebar,
+  button,
+  .no-print,
+  .modal-close-btn,
+  [data-no-print="true"],
+  input[type="button"],
+  input[type="submit"] {
+    display: none !important;
+  }
+
+  main {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  /* Reset modal overlays during window.print */
+  .fixed.inset-0 {
+    position: static !important;
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    display: block !important;
+  }
+
+  .fixed.inset-0 > div {
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  .print-hidden {
+    display: none !important;
+  }
+
+  /* Preserve background colors and table borders in print */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .page-break-inside-avoid,
+  tr,
+  table {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}
+
+
+/* -------------------------------------------------------------------------
+   USER THEME OVERRIDES (Swaps "teal" for other colors)
+   ------------------------------------------------------------------------- */
+:root[data-color-theme="blue"] {
+  --color-teal-50: var(--color-blue-50);
+  --color-teal-100: var(--color-blue-100);
+  --color-teal-200: var(--color-blue-200);
+  --color-teal-300: var(--color-blue-300);
+  --color-teal-400: var(--color-blue-400);
+  --color-teal-500: var(--color-blue-500);
+  --color-teal-600: var(--color-blue-600);
+  --color-teal-700: var(--color-blue-700);
+  --color-teal-800: var(--color-blue-800);
+  --color-teal-900: var(--color-blue-900);
+  --color-teal-950: var(--color-blue-950);
+}
+
+:root[data-color-theme="rose"] {
+  --color-teal-50: var(--color-rose-50);
+  --color-teal-100: var(--color-rose-100);
+  --color-teal-200: var(--color-rose-200);
+  --color-teal-300: var(--color-rose-300);
+  --color-teal-400: var(--color-rose-400);
+  --color-teal-500: var(--color-rose-500);
+  --color-teal-600: var(--color-rose-600);
+  --color-teal-700: var(--color-rose-700);
+  --color-teal-800: var(--color-rose-800);
+  --color-teal-900: var(--color-rose-900);
+  --color-teal-950: var(--color-rose-950);
+}
+
+:root[data-color-theme="violet"] {
+  --color-teal-50: var(--color-violet-50);
+  --color-teal-100: var(--color-violet-100);
+  --color-teal-200: var(--color-violet-200);
+  --color-teal-300: var(--color-violet-300);
+  --color-teal-400: var(--color-violet-400);
+  --color-teal-500: var(--color-violet-500);
+  --color-teal-600: var(--color-violet-600);
+  --color-teal-700: var(--color-violet-700);
+  --color-teal-800: var(--color-violet-800);
+  --color-teal-900: var(--color-violet-900);
+  --color-teal-950: var(--color-violet-950);
+}
+
+:root[data-color-theme="orange"] {
+  --color-teal-50: var(--color-orange-50);
+  --color-teal-100: var(--color-orange-100);
+  --color-teal-200: var(--color-orange-200);
+  --color-teal-300: var(--color-orange-300);
+  --color-teal-400: var(--color-orange-400);
+  --color-teal-500: var(--color-orange-500);
+  --color-teal-600: var(--color-orange-600);
+  --color-teal-700: var(--color-orange-700);
+  --color-teal-800: var(--color-orange-800);
+  --color-teal-900: var(--color-orange-900);
+  --color-teal-950: var(--color-orange-950);
+}
